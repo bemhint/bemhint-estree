@@ -3,9 +3,9 @@ var acorn = require('acorn'),
 
 describe('collect', function() {
     describe('objectLiterals()', function() {
-        function collectObjLiterals(fn) {
+        function collectObjLiterals(fn, walkers) {
             var content = fn.toString().replace(/^function[^{]+\{/, '').replace(/\}$/, '');
-            return collect.objectLiterals(acorn.parse(content));
+            return collect.objectLiterals(acorn.parse(content), walkers);
         }
 
         it('should not collect anything from empty program', function() {
@@ -85,6 +85,47 @@ describe('collect', function() {
                         ]
                     }]
                 }
+            ]);
+        });
+
+        it('should ignore first argument of BEM.DOM.decl', function() {
+            expect(collectObjLiterals(function() {
+                BEM.decl({block: 'first1'}, {block: 'second1'});
+                BEMDOM.decl({block: 'first2'}, {block: 'second2'});
+                DOM.decl({block: 'first3'}, {block: 'second3'});
+                BEM.DOM.decl({block: 'first4'}, {block: 'second4'});
+                POM.DOM.decl({block: 'first5'}, {block: 'second5'});
+                POM.POM.decl({block: 'first6'}, {block: 'second6'});
+            }, [{
+                CallExpression: function(node, state, c) {
+                    if(node.callee.type !== 'MemberExpression') return c();
+                    if(node.callee.property.type !== 'Identifier') return c();
+                    if(node.callee.property.name !== 'decl') return c();
+                    var object = node.callee.object;
+                    switch(object.type) {
+                        case 'Identifier':
+                            if(['BEM', 'DOM', 'BEMDOM'].indexOf(object.name) === -1) return c();
+                            break;
+                        case 'MemberExpression':
+                            if(object.property.type !== 'Identifier') return c();
+                            if(object.property.name !== 'DOM') return c();
+                            console.log(object.property);
+                            break;
+                        default:
+                            return c();
+                    }
+                    node.arguments.slice(1).forEach(function(arg) {
+                        c(arg);
+                    })
+                }
+            }])).toEqual([
+                {block: 'second1'},
+                {block: 'second2'},
+                {block: 'second3'},
+                {block: 'second4'},
+                {block: 'second5'},
+                {block: 'first6'},
+                {block: 'second6'}
             ]);
         });
     });
