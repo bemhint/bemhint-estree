@@ -38,7 +38,10 @@ describe('collect', function() {
                     iife: (function() {
                         return {nested: 'yes'};
                     })(),
-                    koo: {woo: ({a: 'x'})['a']}
+                    koo: {woo: ({a: 'x'})['a']},
+                    'string-literal': {
+                        0: 'num'
+                    }
                 }
             })).toEqual([
                 {},
@@ -50,7 +53,8 @@ describe('collect', function() {
                     num: 12,
                     vrbl: undefined,
                     iife: undefined,
-                    koo: {woo: undefined}
+                    koo: {woo: undefined},
+                    'string-literal': {0: 'num'}
                 }
             ]);
         });
@@ -231,8 +235,7 @@ describe('collect', function() {
                 }
             ])).toEqual({
                 regular: [
-                    {block: 'block'},
-                    {block: 'block', mod: 'name'}
+                    {block: 'block'}
                 ],
                 inMix: []
             });
