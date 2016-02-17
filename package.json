@@ -2,7 +2,6 @@
   "name": "bemhint-estree",
   "version": "0.0.0",
   "description": "acorn-based plugins for bemhint",
-  "main": "index.js",
   "dependencies": {
     "acorn": "^2.7.0",
     "depsjs": "^0.2.0",
@@ -16,12 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/incrop/bemhint-estree.git"
+    "url": "git://github.yandex-team.ru/incrop/bemhin-estree.git"
   },
-  "author": "Dmitry Starostin <incrop@gmail.com>",
-  "license": "ISC",
+  "author": "Dmitry Starostin <incrop@yandex-team.ru>",
+  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/incrop/bemhint-estree/issues"
+    "url": "https://github.yandex-team.ru/incrop/bemhint-estree/issues"
   },
-  "homepage": "https://github.com/incrop/bemhint-estree#readme"
+  "publishConfig": {
+    "registry": "http://npm.yandex-team.ru/"
+  },
+  "homepage": "https://github.yandex-team.ru/incrop/bemhint-estree#readme"
 }
