@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "acorn-based plugins for bemhint",
   "dependencies": {
-    "acorn": "^2.7.0",
+    "acorn": "^5.1.2",
     "depsjs": "^0.2.0",
     "lodash": "^4.2.1"
   },
