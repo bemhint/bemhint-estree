@@ -15,15 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.yandex-team.ru/incrop/bemhin-estree.git"
+    "url": "git://github.com/bemhint/bemhint-estree.git"
   },
-  "author": "Dmitry Starostin <incrop@yandex-team.ru>",
+  "author": "Dmitry Starostin <dmstarostin@gmail.com>",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.yandex-team.ru/incrop/bemhint-estree/issues"
+    "url": "https://github.com/bemhint/bemhint-estree/issues"
   },
-  "publishConfig": {
-    "registry": "http://npm.yandex-team.ru/"
-  },
-  "homepage": "https://github.yandex-team.ru/incrop/bemhint-estree#readme"
+  "homepage": "https://github.com/bemhint/bemhint-estree#readme"
 }
